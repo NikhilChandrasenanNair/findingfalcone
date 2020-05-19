@@ -1,0 +1,44 @@
+
+.App-header {
+  text-align: center;
+}
+
+h3 {
+  font-weight: normal;
+}
+
+.destination, .vehicle {
+  display: inline-block;
+  min-width: 200px;
+  min-height: 200px;
+  -webkit-box-shadow: 8px 4px 30px -25px rgba(0, 67, 255);
+  -moz-box-shadow: 8px 4px 30px -25px rgba(0, 67, 255);
+  box-shadow: 8px 4px 30px -25px rgba(0, 67, 255);
+  margin-top: 40px;
+  padding: 20px;
+  vertical-align: top;
+}
+
+.dataList {
+  display: inline-block;
+  margin: 24px 0;
+  cursor: pointer;
+}
+
+.radio {
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+
+.disabled {
+  pointer-events: none;
+  color: #f2f2f2;
+  font-size: 15px;
+  cursor: none;
+}
+
+.total-time-taken {
+  margin-top: 40px;
+  font-weight: bold;
+}
