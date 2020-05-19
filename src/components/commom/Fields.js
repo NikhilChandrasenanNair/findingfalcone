@@ -44,7 +44,7 @@ export class DataList extends Component {
     }
 
     render() {
-        let {options, name} = this.props;
+        let { options, name } = this.props;
         return (
             <div className={`field dataList`}>
                 <input list={name} id={`dataList-${name}`} onChange={this.onChange.bind(this)}/>
@@ -68,15 +68,15 @@ export class RadioButtonGroup extends Component {
     }
 
     render() {
-        let { options, name, showAdditionalData} = this.props;
+        let { options, name, showAdditionalData, stateData} = this.props;
         return (
             <div className={`field radio-grp`}>
                 <div className="values">
                     {options.map((aVehicle, index) => (
-                        <label key={index} className="radio">
-                            <input type="radio" value={aVehicle.name} name={name} onChange={this.onChange.bind(this)} 
+                        <label key={index} className={`radio ${stateData[name].distance > aVehicle.max_distance ? 'disabled' : ''}`}>
+                            <input type="radio" value={aVehicle.name} name={name} onChange={this.onChange.bind(this)} disabled={stateData[name].distance > aVehicle.max_distance ? true : false}
                                 data-max_distance={aVehicle.max_distance} data-speed={aVehicle.speed} data-total_no={aVehicle.total_no} />
-                            <span>{aVehicle.name} {!!(showAdditionalData) && <span>({aVehicle.total_no})</span> }</span>
+                            <span className={`vehicle-name ${stateData[name].distance > aVehicle.max_distance ? 'disabled' : ''}`}>{aVehicle.name} {!!(showAdditionalData) && <span>({aVehicle.total_no})</span> }</span>
                         </label>
                     ))}
                 </div>
