@@ -31,6 +31,13 @@ h3 {
   cursor: pointer;
 }
 
+.disabled {
+  pointer-events: none;
+  color: #f2f2f2;
+  font-size: 15px;
+  cursor: none;
+}
+
 .total-time-taken {
   margin-top: 40px;
   font-weight: bold;
