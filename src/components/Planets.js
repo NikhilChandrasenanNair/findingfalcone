@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Vehicles from './Vehicles';
 import {DataList, Button} from './commom/Fields';
+import config from '../utils/config';
 
 
 export default class Planets extends Component {
@@ -119,7 +120,7 @@ export default class Planets extends Component {
 
         return (
             <>
-                {[...Array(4)].map((aPlanet, index) => (
+                {[...Array(config.destionationNumber)].map((aPlanet, index) => (
                     <React.Fragment key={`destination${index + 1}`}>
                         <div className={`destination`}>
                             <div className={`destination-details`}>{`Destination${index + 1}`}</div>
