@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import api from './apis/home';
 import Wrapper from './components/Wrapper';
+import * as utils from './utils/utils'
 import './App.css';
 
 class App extends Component {
-  state = {
-    planets: [],
-    vehicles: [],
-    token: ''
-  }
+  constructor(props) {
+    super(props);
+    this.state = utils.getStateFromPropsForDesktop(props);
+  } 
   
   componentDidMount() {
     this.getPlanets();
