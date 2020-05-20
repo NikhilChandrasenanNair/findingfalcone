@@ -3,9 +3,6 @@ import { RadioButtonGroup } from './commom/Fields';
 
 
 export default class Vehicles extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         let { data, name, stateData } = this.props;
