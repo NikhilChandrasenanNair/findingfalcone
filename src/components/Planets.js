@@ -2,17 +2,13 @@ import React, {Component} from 'react';
 import Vehicles from './Vehicles';
 import {DataList, Button} from './commom/Fields';
 import config from '../utils/config';
-
+import * as utils from '../utils/utils';
 
 export default class Planets extends Component {
-    state = {
-        totalTime: 0,
-        selectedPlanetArray: [],
-        selectedVehicleArray: [],
-        //planets: this.props.planetData || [],
-        vehicles: this.props.vehicleData || [],
-        token: '',
-    }
+    constructor(props) {
+        super(props);
+        this.state = utils.getStateFromPropsForDesktop(props);
+    } 
 
     // filterVehicle = (state) => {
     //     state.selectedVehicleArray.map((aVehicle) => {
