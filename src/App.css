@@ -1,6 +1,18 @@
 
-.App-header {
+.header-section {
+  float: right;
+  position: relative;
+  top: 32px;
+}
+
+.header-section a {
+  padding: 20px;
+}
+
+
+.main-section {
   text-align: center;
+  clear: both;
 }
 
 h3 {
@@ -54,4 +66,12 @@ h3 {
 .find-falcone-btn:hover {
   background: #000;
   color: #fff;
+}
+
+.footer-section {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
 }
