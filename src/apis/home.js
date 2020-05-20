@@ -30,12 +30,36 @@ api.getToken = () => {
     const options = {
         headers: { 'Accept': 'application/json' }
     };
-    axios.post(`${config.baseUrl}${config.token}`, {}, options)
+    let token = axios.post(`${config.baseUrl}${config.token}`, {}, options)
         .then((response) => {
-            console.log("Token: ", response);
+            return response.data;
         }, (error) => {
             console.log(error);
         });
+
+    return token
+}
+
+api.findFalcone = (tokenValue, planetArray, vehicleArray) => {
+    if (!tokenValue) {
+        return;
+    }
+    const postObj = {
+        token: tokenValue,
+        "planet_names": planetArray,
+        "vehicle_names": vehicleArray,
+    }
+    const options = {
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json'}
+    };
+    let result = axios.post(`${config.baseUrl}${config.find}`, postObj, options)
+        .then((response) => {
+            return response.data;
+        }, (error) => {
+            console.log(error);
+        });
+
+    return result
 }
 
 export default api;
