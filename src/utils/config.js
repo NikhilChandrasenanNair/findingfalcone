@@ -5,5 +5,6 @@ module.exports = {
     planets: '/planets',
     vehicles: '/vehicles',
     token: '/token',
-    find: '/find'
+    find: '/find',
+    destionationNumber: 4,
 }
