@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class Button extends Component {
     onClick(event) {
         this.props.onClick(event);
-    }
+    } 
     
     render() {
         return (
@@ -58,10 +58,6 @@ export class DataList extends Component {
 }
 
 export class RadioButtonGroup extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     // componentDidMount() {
     //     if (this.props.stateData.selectedVehicleArray.length){
