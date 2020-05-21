@@ -35,7 +35,7 @@ export default class Planets extends Component {
         }, () => {
             this.setState({
                 selectedPlanetArray: this.arrayCreator('planet'),
-                //selectedVehicleArray: this.clearVehicle(key, this.state),
+                totalTime: 0,
             })
         })
     }
@@ -85,13 +85,23 @@ export default class Planets extends Component {
         }, () => {
             this.setState({
                 selectedVehicleArray: this.arrayCreator('vehicle'),
-                totalTime: this.state.totalTime + (this.state[name].distance / this.state[name].speed),
+                totalTime: this.totalTime('destination'), 
             }, () => {
                     if (this.state.selectedVehicleArray.length) {
                        // this.filterVehicle(this.state)
                     }
             })
         })        
+    }
+
+    totalTime = (value) => {
+        let time = 0
+        Object.keys(this.state).map(aKey => {
+            if (aKey.includes(value) && this.state[aKey].speed) {                
+                time = time + (this.state[aKey].distance / this.state[aKey].speed)
+            }
+        })
+        return time;
     }
 
     findFalcone = () => {

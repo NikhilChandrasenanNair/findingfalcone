@@ -12,7 +12,8 @@ export default class Vehicles extends Component {
                 {data.map((aVehicle, index) => (
                     <React.Fragment key={`vehicle${index + 1}`}>
                         {index < 1 && (
-                            <RadioButtonGroup options={data} name={name} showAdditionalData={true} onChange={this.props.onChange} stateData={stateData}/>
+                            <RadioButtonGroup options={data} name={name} showAdditionalData={true} 
+                                onChange={this.props.onChange} stateData={stateData}/>
                         )}
                     </React.Fragment>
                 ))}
