@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import * as utils from '../../utils/utils';
+
 
 export class Button extends Component {
     onClick(event) {
@@ -8,7 +10,7 @@ export class Button extends Component {
     render() {
         return (
             <button className={`btn ${this.props.className}`} onClick={this.onClick.bind(this)}>
-                Find Falcone
+                {this.props.text}
             </button>
         );
     }
@@ -37,6 +39,16 @@ export class Select extends Component {
 }
 
 export class DataList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = utils.getStateFromPropsForDesktop(props);
+    }
+
+    reset = () => {
+        this.setState({
+            reset: true
+        })
+    }
 
     onChange(event) {
         this.props.onChange(event);
@@ -46,7 +58,7 @@ export class DataList extends Component {
         let { options, name } = this.props;
         return (
             <div className={`field dataList`}>
-                <input list={name} id={`dataList-${name}`} onChange={this.onChange.bind(this)}/>
+                <input list={name} id={`dataList-${name}`} onChange={this.onChange.bind(this)} value={(this.state.reset) ? "" : undefined}/>
                 <datalist id={name} >      
                     {options.map((option, index) => (
                         <option key={`${option.name}${index}`} value={option.name} data-distance={option.distance}/>

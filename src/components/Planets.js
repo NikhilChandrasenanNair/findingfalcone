@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import Vehicles from './Vehicles';
-import {DataList, Button} from './commom/Fields';
+import {DataList} from './commom/Fields';
 import config from '../utils/config';
 import * as utils from '../utils/utils';
+import { Link, } from "react-router-dom";
 
 export default class Planets extends Component {
     constructor(props) {
         super(props);
         this.state = utils.getStateFromPropsForDesktop(props);
+        this.child = React.createRef();
     } 
 
     // filterVehicle = (state) => {
@@ -20,6 +22,24 @@ export default class Planets extends Component {
     //         })
     //     })
     // }
+
+    getAlert = () => {
+        Object.keys(this.state).map(aKey => {
+            if (aKey.includes('destination')) {
+                this.setState({
+                    [aKey]: ''
+                })
+            }
+        })
+        this.setState({
+            token: '',
+            totalTime: 0,
+            selectedPlanetArray: [],
+            selectedVehicleArray: []
+        }, () => {
+            this.child.current.reset.bind(this);
+        })
+    }
 
     onPlanetSelect = (event) => {
         let key = event.target.id.split('-')[1];
@@ -130,7 +150,7 @@ export default class Planets extends Component {
                     <React.Fragment key={`destination${index + 1}`}>
                         <div className={`destination`}>
                             <div className={`destination-details`}>{`Destination${index + 1}`}</div>
-                                <DataList options={planetData} name={`destination${index + 1}`} onChange={this.onPlanetSelect} />
+                            <DataList options={planetData} name={`destination${index + 1}`} onChange={this.onPlanetSelect} ref={this.child} />
                             {!!(this.state[`destination${index + 1}`] && this.state[`destination${index + 1}`].planet) && (<Vehicles data={this.state.vehicles} stateData={this.state} name={`destination${index + 1}`} onChange={this.onVehicleSelect}/>) }
                         </div>
                     </React.Fragment>                
@@ -138,7 +158,9 @@ export default class Planets extends Component {
 
                 <div className={'total-time-taken'}>Time Taken: {this.state.totalTime}</div>
 
-                <Button className={'find-falcone-btn'} onClick={() => this.findFalcone(this)} />
+                <Link to={`/result`} className={'find-falcone-link'} onClick={() => this.findFalcone(this)}>
+                    Find Falcone
+                </Link>
 
             </>
         )

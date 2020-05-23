@@ -12,6 +12,7 @@ function getStateFromProps(props) {
         selectedPlanetArray: [],
         selectedVehicleArray: [],
         vehicles: props.vehicleData || [],
+        reset: false,
     }
     
     return state;
