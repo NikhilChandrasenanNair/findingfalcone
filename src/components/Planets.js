@@ -126,12 +126,8 @@ export default class Planets extends Component {
 
     findFalcone = () => {
         this.props.getToken().then((response) => {
-            this.setState({
-                token: response.token
-            }, () => {
-                    const { token, selectedPlanetArray, selectedVehicleArray } = this.state;
-                    this.props.findFalcone(token, selectedPlanetArray, selectedVehicleArray )
-            })
+            const { selectedPlanetArray, selectedVehicleArray } = this.state;
+            this.props.findFalcone(response.token, selectedPlanetArray, selectedVehicleArray )
         });
     }
 
