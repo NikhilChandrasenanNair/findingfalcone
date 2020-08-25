@@ -66,3 +66,27 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+
+# TODO's
+Issue with decrease/increase vehicle count
+Issues with increment and decrement total time
+Issue while selecting vehicle
+Reset 
+Error
+Optimize code
+
+## DONE
+1) Planet Selector Dropdown + Autocomplete
+2) Vehicle Listing
+3) Vehicle Disabling based on max-distance
+4) Total Time
+5) Modular Code
+6) Footer
+7) Header Nav
+8) Result Page
+
+
+

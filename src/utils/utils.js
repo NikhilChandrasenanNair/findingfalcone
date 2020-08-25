@@ -13,6 +13,10 @@ function getStateFromProps(props) {
         selectedVehicleArray: [],
         vehicles: props.vehicleData || [],
         reset: false,
+        result: {
+            planet_name: '',
+            status: false
+        }
     }
     
     return state;

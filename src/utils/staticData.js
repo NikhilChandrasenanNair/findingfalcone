@@ -10,6 +10,13 @@ module.exports = {
         heading: 'finding falcone!',
         description: 'select planets you want to search in:',
     },
+    "result-section": {
+        heading: 'finding falcone!',
+        success: 'Success! Congratulations on Finding Falcone. King Shan is mighty pleased.',
+        fail: 'Not found',
+        timeTaken: 'Time taken:',
+        planetFound: 'Planet Found:',
+    },
     "footer-section": {
         para: 'coding problem',
         geektrust: {

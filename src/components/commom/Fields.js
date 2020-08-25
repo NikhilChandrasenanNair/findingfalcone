@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import * as utils from '../../utils/utils';
 
-
 export class Button extends Component {
     onClick(event) {
         this.props.onClick(event);
@@ -70,36 +69,46 @@ export class DataList extends Component {
 }
 
 export class RadioButtonGroup extends Component {
+    constructor(props) {
+        super(props);
+        this.options = Array.from(props.stateData.vehicles) 
+    }
 
-    // componentDidMount() {
-    //     if (this.props.stateData.selectedVehicleArray.length){
-    //         this.filterVehicle(this.props)
-    //     } 
-    // }    
+    filterVehicle = (props, event) => {
+        this.options = Array.from(props.stateData.vehicles);
+        let destinationArray = Object.keys(props.stateData).filter((item) => {
+            return item.includes('destination');
+        })
 
-    // filterVehicle = (props) => {
-    //     let planetArray = [...props.options];
-    //     props.stateData.selectedVehicleArray.map((aVehicle) => {
-    //         planetArray.map((anItem, index) => {
-    //             if (anItem.name === aVehicle) {
-    //                 anItem.total_no = anItem.total_no - 1
-    //             }
-    //             return anItem
-    //         })
-    //     })
-    // }
+        destinationArray.forEach((destination) => {
+            if (props.stateData.selectedVehicleArray.length) {
+                this.options.forEach(vehicle => {
+                    if (event.target.value === vehicle.name) {
+                        vehicle.total_no = vehicle.total_no - 1;
+                    }
+                })
+            } else if (event.target.value) {
+                this.options.forEach(vehicle => {
+                    if (event.target.value === vehicle.name) {
+                        vehicle.total_no = vehicle.total_no - 1;
+                    }
+                })
+            }
+        })
+    }
 
     onChange(event) {
+        this.filterVehicle(this.props, event);
         this.props.onChange(event);
     }
 
     render() {
-        let { options, name, showAdditionalData, stateData} = this.props;
+        let { name, showAdditionalData, stateData } = this.props;        
 
         return (
             <div className={`field radio-grp`}>
                 <div className="values">
-                    {options.map((aVehicle, index) => (
+                    {this.options.map((aVehicle, index) => (
                         <label key={index} className={`radio ${((stateData[name].distance > aVehicle.max_distance) || aVehicle.total_no < 1) ? 'disabled' : ''}`}>
                             <input type="radio" value={aVehicle.name} name={name} onChange={this.onChange.bind(this)} disabled={((stateData[name].distance > aVehicle.max_distance) || aVehicle.total_no < 1) ? true : false}
                                 data-max_distance={aVehicle.max_distance} data-speed={aVehicle.speed} data-total_no={aVehicle.total_no} />
