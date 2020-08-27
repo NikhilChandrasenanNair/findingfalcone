@@ -71,10 +71,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 
 # TODO's
-Issue with decrease/increase vehicle count
-Issues with increment and decrement total time
 Issue while selecting vehicle
-Reset 
 Error
 Optimize code
 
@@ -87,6 +84,7 @@ Optimize code
 6) Footer
 7) Header Nav
 8) Result Page
+9) Reset
 
 
 

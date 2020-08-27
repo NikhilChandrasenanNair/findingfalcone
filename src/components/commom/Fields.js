@@ -43,12 +43,6 @@ export class DataList extends Component {
         this.state = utils.getStateFromPropsForDesktop(props);
     }
 
-    reset = () => {
-        this.setState({
-            reset: true
-        })
-    }
-
     onChange(event) {
         this.props.onChange(event);
     }
@@ -57,7 +51,7 @@ export class DataList extends Component {
         let { options, name } = this.props;
         return (
             <div className={`field dataList`}>
-                <input list={name} id={`dataList-${name}`} onChange={this.onChange.bind(this)} value={(this.state.reset) ? "" : undefined}/>
+                <input list={name} id={`dataList-${name}`} onChange={this.onChange.bind(this)} value={(this.props.stateData[name] && this.props.stateData[name].planet) ? this.props.stateData[name].planet : ''} />
                 <datalist id={name} >      
                     {options.map((option, index) => (
                         <option key={`${option.name}${index}`} value={option.name} data-distance={option.distance}/>
@@ -71,34 +65,13 @@ export class DataList extends Component {
 export class RadioButtonGroup extends Component {
     constructor(props) {
         super(props);
-        this.options = Array.from(props.stateData.vehicles) 
     }
 
     filterVehicle = (props, event) => {
-        this.options = Array.from(props.stateData.vehicles);
-        let destinationArray = Object.keys(props.stateData).filter((item) => {
-            return item.includes('destination');
-        })
-
-        destinationArray.forEach((destination) => {
-            if (props.stateData.selectedVehicleArray.length) {
-                this.options.forEach(vehicle => {
-                    if (event.target.value === vehicle.name) {
-                        vehicle.total_no = vehicle.total_no - 1;
-                    }
-                })
-            } else if (event.target.value) {
-                this.options.forEach(vehicle => {
-                    if (event.target.value === vehicle.name) {
-                        vehicle.total_no = vehicle.total_no - 1;
-                    }
-                })
-            }
-        })
+        
     }
 
     onChange(event) {
-        this.filterVehicle(this.props, event);
         this.props.onChange(event);
     }
 
@@ -108,11 +81,11 @@ export class RadioButtonGroup extends Component {
         return (
             <div className={`field radio-grp`}>
                 <div className="values">
-                    {this.options.map((aVehicle, index) => (
-                        <label key={index} className={`radio ${((stateData[name].distance > aVehicle.max_distance) || aVehicle.total_no < 1) ? 'disabled' : ''}`}>
-                            <input type="radio" value={aVehicle.name} name={name} onChange={this.onChange.bind(this)} disabled={((stateData[name].distance > aVehicle.max_distance) || aVehicle.total_no < 1) ? true : false}
-                                data-max_distance={aVehicle.max_distance} data-speed={aVehicle.speed} data-total_no={aVehicle.total_no} />
-                            <span className={`vehicle-name ${((stateData[name].distance > aVehicle.max_distance) || aVehicle.total_no < 1) ? 'disabled' : ''}`}>{aVehicle.name} {!!(showAdditionalData) && <span>({aVehicle.total_no < 0 ? 0 : aVehicle.total_no})</span> }</span>
+                    {stateData.vehicles.map((aVehicle, index) => (
+                        <label key={index} className={`radio ${(stateData[name].distance > aVehicle.max_distance) ? 'disabled' : ''}`}>
+                            <input type="radio" value={aVehicle.name} name={name} onChange={this.onChange.bind(this)} disabled={((stateData[name].distance > aVehicle.max_distance)) ? true : false}
+                                data-max_distance={aVehicle.max_distance} data-speed={aVehicle.speed} data-total_no={aVehicle.total_no} checked={this.props.stateData[name] && this.props.stateData[name].vehicle === aVehicle.name ? true: false}/>
+                            <span className={`vehicle-name ${((stateData[name].distance > aVehicle.max_distance)) ? 'disabled' : ''}`}>{aVehicle.name} {!!(showAdditionalData) && <span>({aVehicle.total_no})</span> }</span>
                         </label>
                     ))}
                 </div>

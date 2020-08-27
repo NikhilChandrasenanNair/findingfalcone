@@ -65,12 +65,19 @@ export default class Planets extends Component {
         });
     }
 
+    filterOutPlanets = (planetData) => {
+        let returnObj =  planetData.filter((aPlanet) => {
+            return !this.props.stateValue.selectedPlanetArray.includes(aPlanet.name)
+        })
+
+        return returnObj;
+
+    }
+
     render() {
         let { planetData } = this.props;
         if(this.props.stateValue.selectedPlanetArray.length) {
-            planetData = planetData.filter((aPlanet) => {
-                return !this.props.stateValue.selectedPlanetArray.includes(aPlanet.name)
-            })
+            planetData = this.filterOutPlanets(planetData)
         }
         return (
             <>
@@ -78,7 +85,7 @@ export default class Planets extends Component {
                     <React.Fragment key={`destination${index + 1}`}>
                         <div className={`destination`}>
                             <div className={`destination-details`}>{`Destination${index + 1}`}</div>
-                            <DataList options={planetData} name={`destination${index + 1}`} onChange={this.onPlanetSelect} ref={this.child} />
+                            <DataList options={planetData} name={`destination${index + 1}`} onChange={this.onPlanetSelect} ref={this.child} stateData={this.props.stateValue}/>
 
                             {!!(this.props.stateValue[`destination${index + 1}`] && this.props.stateValue[`destination${index + 1}`].planet) && 
                                 (<Vehicles data={this.props.stateValue.vehicles} stateData={this.props.stateValue} name={`destination${index + 1}`} onChange={this.onVehicleSelect}/>) 

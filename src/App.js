@@ -72,11 +72,10 @@ class App extends Component {
   selectPlanet = (planet) => {
     this.setState({
       ...this.state,
-      ...planet,
-      
+      ...planet     
     }, () => {
       this.setState({
-        selectedPlanetArray: this.arrayCreator('planet'),
+        selectedPlanetArray: this.arrayCreator('planet')
       })
     })
   }
@@ -112,6 +111,21 @@ class App extends Component {
     return time;
   }
 
+  reset = () => {
+    let resetObj = {};
+    Object.keys(this.state).filter((item) => {
+      return item.includes('destination');
+    }).map(item => {
+      resetObj[item] = {};
+    });
+
+    this.setState({
+      selectedPlanetArray: [],
+      selectedVehicleArray: [],
+      ...resetObj
+    })
+  }
+
   render() {  
     return (
       <div className="App">
@@ -126,7 +140,7 @@ class App extends Component {
               <Main stateValue={this.state} getToken={this.getToken} findFalcone={this.findFalcone} selectPlanet={this.selectPlanet} selectVehicle={this.selectVehicle}/>
             )} />
             <Route path="/result" render={() => (
-              <Result stateValue={this.state}/>
+              <Result stateValue={this.state} reset={this.reset}/>
             )} />
           </Switch>
         </main>
